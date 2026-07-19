@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="78 62 484 430" fill="none">
+ <path d="M 157.19,394.00 L 112.48,389.51 L 97.43,339.24 L 132.32,310.93 L 132.32,310.93 L 94.38,286.86 L 103.49,235.18 L 147.38,225.54 L 147.38,225.54 L 124.28,187.00 L 155.61,144.91 L 199.16,155.98 L 199.16,155.98 L 195.81,111.18 L 242.70,87.63 L 276.64,117.07 L 276.64,117.07 L 293.76,75.53 L 346.24,75.53 L 363.36,117.07 L 363.36,117.07 L 397.30,87.63 L 444.19,111.18 L 440.84,155.98 L 440.84,155.98 L 484.39,144.91 L 515.72,187.00 L 492.62,225.54 L 492.62,225.54 L 536.51,235.18 L 545.62,286.86 L 507.68,310.93 L 507.68,310.93 L 542.57,339.24 L 527.52,389.51 L 482.81,394.00 L 449.90,375.00 A 150,150 0 1 0 190.10,375.00 Z" fill="#ed1c24"/>
+ <circle cx="149.4" cy="338.9" r="6.5" fill="#0a0c0f"/><circle cx="157.1" cy="236.1" r="6.5" fill="#0a0c0f"/><circle cx="221.4" cy="155.4" r="6.5" fill="#0a0c0f"/><circle cx="320.0" cy="125.0" r="6.5" fill="#0a0c0f"/><circle cx="418.6" cy="155.4" r="6.5" fill="#0a0c0f"/><circle cx="482.9" cy="236.1" r="6.5" fill="#0a0c0f"/><circle cx="490.6" cy="338.9" r="6.5" fill="#0a0c0f"/>
+ <path d="M 482.81,394.00 A 188,188 0 0 1 157.19,394.00 L 190.10,375.00 A 150,150 0 0 0 449.90,375.00 Z" fill="#2b3037"/>
+ <line x1="417.0" y1="468.0" x2="392.0" y2="424.7" stroke="#14171b" stroke-width="10"/><line x1="223.0" y1="468.0" x2="248.0" y2="424.7" stroke="#14171b" stroke-width="10"/><circle cx="466.4" cy="384.5" r="17" fill="#2e343b"/><circle cx="466.4" cy="384.5" r="9" fill="#14171b"/><circle cx="173.6" cy="384.5" r="17" fill="#2e343b"/><circle cx="173.6" cy="384.5" r="9" fill="#14171b"/>
+ <text x="320" y="322" font-family="Anton, Archivo, Arial, sans-serif" font-size="215" fill="#ed1c24" text-anchor="middle" transform="skewX(-6)" style="transform-box:fill-box;transform-origin:center">AS</text>
+ <g transform="translate(320,352)" fill="#ed1c24">
+   <rect x="-34" y="-8" width="68" height="17" rx="3"/><rect x="-12" y="9" width="24" height="26"/><path d="M -20,33 L 20,33 L 0,64 Z"/>
+ </g>
+ <g transform="translate(320,430)">
+   <g stroke="#f39a1a" stroke-width="8" stroke-linecap="round">
+     <line x1="0" y1="-2" x2="0" y2="30"/><line x1="0" y1="0" x2="-30" y2="22"/><line x1="0" y1="0" x2="30" y2="22"/>
+     <line x1="0" y1="2" x2="-46" y2="10"/><line x1="0" y1="2" x2="46" y2="10"/>
+   </g>
+   <path d="M -16,14 L 16,14 L 0,-14 Z" fill="#f5b942"/><circle cx="0" cy="6" r="11" fill="#f39a1a"/>
+ </g>
+</svg>
