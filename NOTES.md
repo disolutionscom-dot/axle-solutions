@@ -12,20 +12,18 @@ All competitor "FIRDOUS METALIC IND" logos were removed from the supplied photos
 (cropped on w05; content-aware inpaint on w06/w08/w09). The competitor marketing
 flyer and a duplicate were dropped. Gallery/tab images = img/g1–g9.jpg + hero-weld.jpg.
 
-## Hero background video
-`img/hero-laser.mp4` — your Vecteezy laser-cutting clip. Hero is **video only** (no picture)
-at **0.5 opacity (50% transparent)**. Autoplays muted and runs as a **ping-pong loop**: plays
-forward, then rewinds at 1x back to the start, then forward again, forever (JS-driven, since
-HTML video can't play in reverse natively).
-Now **compressed to ~4.3 MB** (720p, H.264, **audio track removed**, faststart) — down from
-16 MB. Removing the audio track + shrinking the file is what makes muted autoplay reliable;
-the JS also retries repeatedly and starts on the first interaction anywhere as a fallback.
-If autoplay STILL needs a click on a given device, that's the browser/OS blocking it
-(Safari "Never Auto-Play" setting, or Low Power / battery-saver mode) — no website can
-override those; the click fallback covers it.
-The clip is 23.7 s, so the ping-pong cycle (forward + reverse) is ~47 s. Say the word and I'll
-trim it to a punchier ~8–10 s loop. Vecteezy free clips need attribution unless you hold a Pro
-licence — confirm your licence.
+## Hero background — canvas frame animation (always plays)
+The hero background is **no longer a `<video>`**. A `<video>` can always be blocked by the
+device (iOS/macOS Low Power Mode, Safari "never auto-play", data-saver) and no code can force
+it — that's why you kept having to tap.
+
+Instead the laser footage is now 48 frames packed into one sprite sheet
+(`img/laser-frames.jpg`, ~450 KB) drawn on a `<canvas>` and played forward-then-reverse
+(ping-pong) at 12 fps. **Canvas drawing is never subject to autoplay policy**, so it starts on
+its own, every time, on every device — no tap, no permission. At 0.68 opacity behind the dark
+overlay. The old `img/hero-laser.mp4` is now unused (kept in the folder in case you want it).
+To use a different clip later, send it and I'll re-generate the sprite sheet.
+
 
 ## Logo
 Your logo kept arriving pasted **inline (not as a file)**, which I can't read pixel data from —
@@ -77,3 +75,44 @@ red section rules, no rainbow gradients. Fonts: Anton + Archivo + Inter.
   cropped version.) An SVG recreation was attempted but looked worse, so it was discarded.
 - Contact form uses a mailto: fallback (opens the visitor's email app). For direct-to-inbox
   submissions, connect Formspree/Getform or a backend.
+
+---
+
+## UPDATE — 2026-07-19 (major revision)
+
+**Focus shifted to LASER CUTTING + architectural/structural steel. Kitchen removed entirely.**
+
+- **Logo = your EXACT logo.** Extracted as vector from `axle solutions working 1.pdf` (it was
+  vector art, not a photo), background keyed to transparent. `img/axle-emblem.png` (gear + AS +
+  laser spark) is used in nav, footer, loader, favicon; `img/axle-logo.png` (full lockup with
+  wordmark) is the SEO/schema logo and is available for print. The earlier hand-drawn SVG is gone.
+- **Hero** now leads with laser: "Precision laser cutting & metal fabrication", kicker "20 kW
+  Fibre Laser · 2m × 6m Bed", real stats (20 kW, 14+ yrs, 200+ clients GCC-wide, 40 machines —
+  all from the Taj Al Mas brochure). Background **video opacity raised to 0.68** with a lighter
+  overlay so the laser footage shows through clearly.
+- **12 service categories** (was 9, no kitchen): Laser Cutting · Mashrabiya & Decorative Panels ·
+  Base Plates & Flanges · Pipe & Section Rolling · Handrails & Staircases · Bollards & Posts ·
+  Fencing & Steel Gates · Structural Steel · Fabrication & Lathe Work · Cladding & Profiles ·
+  Custom Fabrication & Welding · Pergolas & Canopies.
+- **Real images** now used throughout — pulled from the Taj Al Mas brochure (laser 20 kW, handrails,
+  bollards, gates, structural, profiles, bending/shearing machines) and the Dawar Al Falah brochure
+  (mashrabiya panel, brass flanges, lathe/turned parts). Projects gallery + testimonials + FAQ +
+  contact-form options all rewritten around these services.
+- **Parent companies:** About credits **Firdous Metalic Ind. LLC** & **Taj Al Mas Group** (full
+  names). Footer group column shows **Taj Al Mas Group only** (Metal Fabrication & Welding LLC +
+  Eng. Turning); copyright reads "part of Taj Al Mas Group".
+
+### ⚠️ Confirm before publishing
+- **Image rights:** the mashrabiya / flanges / lathe images come from the **Dawar Al Falah**
+  brochure and some Taj Al Mas brochure photos may be stock the group licensed. Fine if these are
+  sister/group companies and you have rights — please confirm, or send me your own photos to swap in.
+- Stats (200 clients, 14 yrs, 40 machines, 20 kW / 2×6 m) are taken from the Taj Al Mas brochure —
+  confirm they apply to Axle Solutions specifically.
+- WhatsApp button still uses the landline; send a mobile number.
+
+## UPDATE — 2026-07-19 (later)
+- **Parent company = Taj Al Mas ONLY.** Firdous removed completely (0 refs on page). The
+  **Taj Al Mas Group logo** was extracted from the Taj Al Mas brochure PDF, background keyed
+  transparent (`img/taj-logo.png`), and shown as a "Part of [logo]" badge in About + footer.
+- **Hero background is now a CANVAS animation, not a video** (see "Hero background" section
+  above) — it always plays automatically, no autoplay blocking possible.
