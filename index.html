@@ -85,7 +85,7 @@ img{max-width:100%;display:block}
 
 /* nav */
 #nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .35s,border-color .35s,padding .35s;padding:6px 0;border-bottom:1px solid transparent}
-#nav.scrolled{background:rgba(10,12,15,.9);backdrop-filter:blur(12px);border-color:var(--line)}
+#nav.scrolled{background:rgba(10,12,15,.94);backdrop-filter:blur(6px);border-color:var(--line)}
 #nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;transition:height .35s}
 #nav.scrolled .wrap{height:62px}
 .brand{display:flex;align-items:center;gap:13px}
@@ -295,7 +295,7 @@ img{max-width:100%;display:block}
 .cinfo a,.cinfo p{color:var(--txt);font-size:1.02rem;margin:0;font-weight:600}
 .cinfo a:hover{color:var(--red)}
 .map{margin-top:24px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);height:220px}
-.map iframe{width:100%;height:100%;border:0;filter:grayscale(.4) invert(.92) hue-rotate(180deg) contrast(.95)}
+.map iframe{width:100%;height:100%;border:0;filter:grayscale(.5) contrast(.95)}
 
 /* footer */
 footer{background:var(--ink);border-top:1px solid var(--line);padding:72px 0 28px}
@@ -629,13 +629,13 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:72px 0 28p
         <a href="#about">About Us</a><a href="#capabilities">Capabilities</a><a href="#gallery">Projects</a><a href="#process">Our Process</a><a href="#contact">Contact</a></div>
       <div class="foot-col"><h5>Capabilities</h5>
         <a href="#capabilities">Laser Cutting</a><a href="#capabilities">Mashrabiya Panels</a><a href="#capabilities">Base Plates &amp; Flanges</a><a href="#capabilities">Pipe Rolling</a><a href="#capabilities">Handrails &amp; Bollards</a></div>
-      <div class="foot-col"><h5>Taj Al Mas Group</h5>
+      <div class="foot-col"><h5>Our Group</h5>
         <img class="foot-taj" src="img/taj-logo.png" alt="Taj Al Mas Group of Companies">
         <a href="https://www.tajalmas.com" target="_blank" rel="noopener">Taj Al Mas Metal Fabrication &amp; Welding LLC</a>
         <a href="https://www.tajalmas.com" target="_blank" rel="noopener">Taj Al Mas Eng. Turning</a>
+        <a href="https://www.firdoussteel.com" target="_blank" rel="noopener">Firdous Metalic Ind. LLC</a>
         <a href="tel:+97167429921">+971 6 742 9921</a>
-        <a href="mailto:Info@axlesolutions.ae">Info@axlesolutions.ae</a>
-        <a>Sharjah — U.A.E.</a></div>
+        <a href="mailto:Info@axlesolutions.ae">Info@axlesolutions.ae</a></div>
     </div>
     <div class="foot-bottom">
       <span>© <span id="year"></span> Axle Solutions Metal Ind. LLC — part of Taj Al Mas Group. All rights reserved.</span>
@@ -658,7 +658,6 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:72px 0 28p
 <div id="lightbox"><button class="x" aria-label="Close">&times;</button><img id="lbImg" src="" alt="Project preview"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/animejs/dist/bundles/anime.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 /* ===================== DATA ===================== */
 const CATEGORIES=[
@@ -752,8 +751,7 @@ const A=window.anime||{};
 const animate=A.animate, stagger=A.stagger, createTimeline=A.createTimeline, utils=A.utils;
 const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-let lenis;
-if(!reduced && window.Lenis){lenis=new Lenis({lerp:.09});(function raf(t){lenis.raf(t);requestAnimationFrame(raf);})();}
+/* Lenis removed — native scroll is far lighter and snappier */
 
 /* loader teardown */
 const loaderEl=$("#page-loader");
@@ -870,7 +868,7 @@ if(!reduced && matchMedia("(pointer:fine)").matches){
  const FPS=12, MS=1000/FPS;
  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
  const img=new Image(); img.decoding="async"; img.src="img/laser-frames.jpg";
- let W=0,H=0,DPR=Math.min(2,window.devicePixelRatio||1),ready=false;
+ let W=0,H=0,DPR=Math.min(1.25,window.devicePixelRatio||1),ready=false;
  let frame=0, dir=1, last=0;
  function resize(){ W=cv.clientWidth; H=cv.clientHeight; cv.width=Math.max(1,W*DPR); cv.height=Math.max(1,H*DPR); ctx.setTransform(DPR,0,0,DPR,0,0); if(ready) draw(); }
  function draw(){
@@ -879,33 +877,40 @@ if(!reduced && matchMedia("(pointer:fine)").matches){
    ctx.clearRect(0,0,W,H);
    ctx.drawImage(img,sx,sy,FW,FH,(W-dw)/2,(H-dh)/2,dw,dh);
  }
+ let rafId=0, onScreen=true, tabOn=true;
  function loop(t){
+   if(!(onScreen&&tabOn)){ rafId=0; return; }      /* stop rAF when hero not visible */
    if(t-last>=MS){
      last=t;
      frame+=dir;
      if(frame>=N-1){frame=N-1;dir=-1;} else if(frame<=0){frame=0;dir=1;}
      draw();
    }
-   requestAnimationFrame(loop);
+   rafId=requestAnimationFrame(loop);
  }
- img.onload=()=>{ ready=true; resize(); draw(); if(!reduced) requestAnimationFrame(loop); };
+ function start(){ if(!rafId && ready && !reduced && onScreen && tabOn){ last=0; rafId=requestAnimationFrame(loop); } }
+ img.onload=()=>{ ready=true; resize(); draw(); start(); };
  img.onerror=()=>{ cv.style.display="none"; };  /* graceful: just show dark hero */
  window.addEventListener("resize",resize,{passive:true});
+ const heroEl=document.querySelector(".hero");
+ if(heroEl && "IntersectionObserver" in window){ new IntersectionObserver(es=>{ onScreen=es[0].isIntersecting; start(); }).observe(heroEl); }
+ document.addEventListener("visibilitychange",()=>{ tabOn=!document.hidden; start(); });
 })();
 
 /* ===================== NAV / UI ===================== */
 const nav=$("#nav");
+let _sc=-1,_tt=-1;
 window.addEventListener("scroll",()=>{
- nav.classList.toggle("scrolled",window.scrollY>40);
- $("#toTop").classList.toggle("show",window.scrollY>700);
+ const sc=window.scrollY>40?1:0; if(sc!==_sc){_sc=sc;nav.classList.toggle("scrolled",!!sc);}
+ const tt=window.scrollY>700?1:0; if(tt!==_tt){_tt=tt;$("#toTop").classList.toggle("show",!!tt);}
 },{passive:true});
-$("#toTop").onclick=()=>{lenis?lenis.scrollTo(0):window.scrollTo({top:0,behavior:"smooth"});};
+$("#toTop").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
 $("#burger").onclick=()=>$("#mnav").classList.add("open");
 $("#mclose").onclick=()=>$("#mnav").classList.remove("open");
 $$("#mnav a").forEach(a=>a.onclick=()=>$("#mnav").classList.remove("open"));
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
  a.addEventListener("click",e=>{const t=document.querySelector(a.getAttribute("href"));if(!t)return;e.preventDefault();
-  lenis?lenis.scrollTo(t,{offset:-70}):t.scrollIntoView({behavior:"smooth"});});
+  window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-66,behavior:"smooth"});});
 });
 /* faq accordion */
 document.addEventListener("click",e=>{
