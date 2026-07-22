@@ -116,3 +116,36 @@ red section rules, no rainbow gradients. Fonts: Anton + Archivo + Inter.
   transparent (`img/taj-logo.png`), and shown as a "Part of [logo]" badge in About + footer.
 - **Hero background is now a CANVAS animation, not a video** (see "Hero background" section
   above) — it always plays automatically, no autoplay blocking possible.
+
+## UPDATE — 2026-07-21 (scroll performance)
+Reported slow scrolling. Applied safe performance fixes:
+- **Removed Lenis smooth-scroll** (CDN + its constant rAF interpolation loop) — this was the
+  biggest cause of laggy scroll feel. Now uses native scroll + CSS `scroll-behavior:smooth`
+  for anchor links (lightweight, GPU-driven).
+- **Hero laser canvas now pauses** when the hero is scrolled off-screen or the tab is hidden
+  (IntersectionObserver + visibilitychange), so it stops consuming CPU/GPU while you scroll the
+  rest of the page. Canvas DPR lowered 2 → 1.25 (~60% less pixel work per frame).
+- **Contact map iframe**: dropped the expensive `invert()` + `hue-rotate()` compositing filters
+  (kept a light grayscale) — those repaint the whole live map every scroll frame.
+- **Scroll handler** no longer rewrites nav/back-to-top classes on every frame (only on state
+  change) → avoids needless style recalcs.
+- Nav backdrop blur 12px → 6px.
+- Tried `content-visibility:auto` on sections but it broke the scroll-reveal animations
+  (sections went blank), so it was reverted.
+Note: the in-app preview browser is too weak to scroll-test this page (it times out); the fixes
+are verified error-free and target the reported slowness directly. Test on your real device.
+
+## UPDATE — 2026-07-21 (performance, round 2)
+- **Images recompressed: 3.1 MB → 2.0 MB (-38%).** Category/work photos capped at 1000 px long
+  side, quality 78 progressive (they display at ~380 px, so no visible loss). Laser sprite sheet
+  re-saved at q58 (it's a faded background). Logos downscaled to sane sizes (still crisp).
+- **Dropped 2 unused web-font files** (Archivo 500, Inter 500 weights — nothing used them).
+- **Removed the grayscale filters** on category + gallery images → less GPU compositing per
+  scroll frame.
+- **Google Maps embed is now lazy** — it doesn't load until you scroll within 400 px of the
+  contact section, so it no longer weighs down initial load or scrolling above it.
+- **`decoding="async"`** on all gallery/category images → image decode won't block the main
+  thread (less scroll jank).
+- **Preload** hints for the hero sprite + nav logo → faster first paint.
+Combined with round 1 (Lenis removed, canvas pauses off-screen, DPR 2→1.25, map filter
+simplified), the page is much lighter. No JS errors; hero + logo verified crisp.

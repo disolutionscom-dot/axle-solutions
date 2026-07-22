@@ -13,9 +13,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0c1620">
 <link rel="icon" type="image/png" href="img/axle-emblem.png">
+<link rel="preload" as="image" href="img/laser-frames.jpg">
+<link rel="preload" as="image" href="img/axle-emblem.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@600;700;800;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Axle Solutions Metal Ind. LLC","url":"https://axlesolutions.ae/","logo":"img/axle-logo.png","telephone":"+97167429921","email":"Info@axlesolutions.ae","description":"20 kW laser cutting, mashrabiya, base plates & flanges, pipe rolling, handrails, bollards and structural steel fabrication in the UAE.","address":{"@type":"PostalAddress","addressLocality":"Sharjah","addressCountry":"AE"}}
 </script>
@@ -231,7 +233,7 @@ img{max-width:100%;display:block}
 .gallery{background:var(--panel);border-top:1px solid var(--line)}
 .g-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
 .g-strip figure{margin:0;position:relative;border-radius:var(--r);overflow:hidden;cursor:pointer;border:1px solid var(--line);aspect-ratio:4/3;will-change:transform}
-.g-strip figure img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease);filter:grayscale(.08)}
+.g-strip figure img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .g-strip figure:hover img{transform:scale(1.07)}
 .g-strip figcaption{position:absolute;left:0;right:0;bottom:0;padding:20px 18px;background:linear-gradient(0deg,rgba(6,8,10,.95),transparent);font-family:var(--fhead);font-weight:700;font-size:.9rem;text-transform:uppercase;letter-spacing:.03em;transform:translateY(8px);opacity:0;transition:.4s var(--ease)}
 .g-strip figcaption::before{content:"";display:block;width:26px;height:2px;background:var(--red);margin-bottom:10px}
@@ -346,8 +348,8 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:72px 0 28p
 .cat-card:hover{transform:translateY(-6px);border-color:var(--line-2)}
 .cat-card:hover::before{transform:scaleX(1)}
 .cat-img{position:relative;aspect-ratio:16/10;overflow:hidden}
-.cat-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15) brightness(.92);transition:transform .8s var(--ease),filter .4s}
-.cat-card:hover .cat-img img{transform:scale(1.08);filter:grayscale(0) brightness(1)}
+.cat-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.cat-card:hover .cat-img img{transform:scale(1.08)}
 .cat-img::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--panel-2) 2%,transparent 45%)}
 .cat-idx{position:absolute;top:14px;left:16px;z-index:2;font-family:var(--fdisplay);font-size:1.5rem;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6)}
 .cat-body{padding:22px 24px 26px}
@@ -607,7 +609,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:72px 0 28p
         <div><h4>Website</h4><a href="https://axlesolutions.ae" target="_blank" rel="noopener">www.axlesolutions.ae</a></div></div>
       <div class="crow"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
         <div><h4>Location</h4><p>Sharjah — United Arab Emirates</p></div></div>
-      <div class="map"><iframe loading="lazy" title="Axle Solutions location" src="https://www.google.com/maps?q=Axle+Solutions+Metal+Industries+Sharjah+UAE&output=embed"></iframe></div>
+      <div class="map"><iframe id="gmap" loading="lazy" title="Axle Solutions location" data-src="https://www.google.com/maps?q=Axle+Solutions+Metal+Industries+Sharjah+UAE&output=embed"></iframe></div>
     </div>
   </div>
 </section>
@@ -715,7 +717,7 @@ const zoomIco=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke
 /* what we fabricate — category grid */
 $("#catGrid").innerHTML=CATEGORIES.map((c,i)=>`
  <a class="cat-card rv" href="#contact">
-  <div class="cat-img"><img src="${c[1]}" alt="${c[0]}" loading="lazy"></div>
+  <div class="cat-img"><img src="${c[1]}" alt="${c[0]}" loading="lazy" decoding="async"></div>
   <span class="cat-idx">${String(i+1).padStart(2,"0")}</span>
   <div class="cat-body"><h3>${c[0]}</h3><p>${c[2]}</p>
    <span class="cat-more">Enquire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
@@ -731,7 +733,7 @@ $("#procRow").innerHTML=STEPS.map(s=>`<div class="proc-step"><div class="n"></di
 
 /* gallery */
 $("#gStrip").innerHTML=GALLERY.map(g=>`
- <figure data-lb="${g[1]}"><img src="${g[1]}" alt="${g[0]}" loading="lazy">
+ <figure data-lb="${g[1]}"><img src="${g[1]}" alt="${g[0]}" loading="lazy" decoding="async">
   <div class="z">${zoomIco}</div><figcaption>${g[0]}</figcaption></figure>`).join("");
 
 /* testimonials */
@@ -918,6 +920,13 @@ document.addEventListener("click",e=>{
  const it=btn.parentElement,ans=it.querySelector(".ans"),open=it.classList.toggle("open");
  btn.setAttribute("aria-expanded",open); ans.style.maxHeight=open?ans.scrollHeight+"px":0;
 });
+
+/* defer Google Maps embed until near viewport */
+(function(){const m=document.getElementById("gmap");if(!m)return;
+ const load=()=>{if(m.dataset.src){m.src=m.dataset.src;delete m.dataset.src;}};
+ if("IntersectionObserver" in window){const io=new IntersectionObserver((e)=>{if(e[0].isIntersecting){load();io.disconnect();}},{rootMargin:"400px"});io.observe(m);}
+ else load();
+})();
 
 /* ===================== LIGHTBOX + FORM ===================== */
 const lb=$("#lightbox");
