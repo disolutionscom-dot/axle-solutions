@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@600;700;800;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Axle Solutions Metal Ind. LLC","url":"https://axlesolutions.ae/","logo":"img/axle-logo.png","telephone":"+971506778293","email":"Info@axlesolutions.ae","description":"20 kW laser cutting, mashrabiya, base plates & flanges, pipe rolling, handrails, bollards and structural steel fabrication in the UAE.","address":{"@type":"PostalAddress","addressLocality":"Sharjah","addressCountry":"AE"}}
+{"@context":"https://schema.org","@type":"Organization","name":"Axle Solutions Metal Ind. LLC","url":"https://axlesolutions.ae/","logo":"img/axle-logo.png","telephone":"+971568231119","email":"Info@axlesolutions.ae","description":"20 kW laser cutting, mashrabiya, base plates & flanges, pipe rolling, handrails, bollards and structural steel fabrication in the UAE.","address":{"@type":"PostalAddress","addressLocality":"Sharjah","addressCountry":"AE"}}
 </script>
 <style>
 /* ============================================================
@@ -359,6 +359,22 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:72px 0 28p
 .cat-more svg{width:15px;height:15px}
 .cat-card:hover .cat-more{gap:14px}
 
+/* machines grid */
+.mach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.mach-card{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--panel-2);transition:transform .4s var(--ease),border-color .4s;position:relative}
+.mach-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);z-index:3}
+.mach-card:hover{transform:translateY(-6px);border-color:var(--line-2)}
+.mach-card:hover::before{transform:scaleX(1)}
+.mach-img{position:relative;aspect-ratio:16/11;overflow:hidden;background:#0c0e12}
+.mach-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.mach-card:hover .mach-img img{transform:scale(1.06)}
+.mach-tag{position:absolute;top:13px;left:13px;z-index:2;background:var(--red);color:#fff;font-family:var(--fhead);font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:40px}
+.mach-body{padding:20px 22px 24px}
+.mach-body h3{font-family:var(--fhead);font-size:1.1rem;font-weight:800;text-transform:uppercase;letter-spacing:-.01em}
+.mach-body p{color:var(--muted);font-size:.88rem;margin:7px 0 0;line-height:1.55}
+@media(max-width:900px){.mach-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.mach-grid{grid-template-columns:1fr}}
+
 /* clients */
 .clients{background:var(--panel);border-top:1px solid var(--line)}
 .client-row{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin-top:52px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
@@ -427,6 +443,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:72px 0 28p
     <ul class="menu">
       <li><a href="#about">About</a></li>
       <li><a href="#capabilities">Capabilities</a></li>
+      <li><a href="#machines">Machines</a></li>
       <li><a href="#gallery">Projects</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -439,7 +456,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:72px 0 28p
 </nav>
 <div id="mnav">
   <button id="mclose" aria-label="Close menu">&times;</button>
-  <a href="#about">About</a><a href="#capabilities">Capabilities</a><a href="#gallery">Projects</a>
+  <a href="#about">About</a><a href="#capabilities">Capabilities</a><a href="#machines">Machines</a><a href="#gallery">Projects</a>
   <a href="#process">Process</a><a href="#contact">Contact</a>
   <a class="btn btn-primary" href="#contact" style="margin-top:14px">Get a Quote</a>
 </div>
@@ -515,6 +532,16 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:72px 0 28p
     <p class="sec-sub">From raw sheet to finished, installed product — the full range of stainless steel, mild steel and aluminium fabrication under one roof.</p>
   </div>
   <div class="wrap"><div class="cat-grid" id="catGrid"></div></div>
+</section>
+
+<!-- OUR MACHINERY -->
+<section class="products pad" id="machines">
+  <div class="wrap center">
+    <span class="eyebrow" style="margin-inline:auto">In-House Machinery</span>
+    <h2 class="sec-title">The <span class="hl">Machines</span> Behind The Work</h2>
+    <p class="sec-sub">Backed by the Taj Al Mas Group's 40-machine, 4-plant capacity — from a 20 kW fibre laser to CNC press brakes, shears, rollers and power presses.</p>
+  </div>
+  <div class="wrap"><div class="mach-grid" id="machGrid"></div></div>
 </section>
 
 <!-- BENEFITS -->
@@ -602,7 +629,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:72px 0 28p
     </form>
     <div class="cinfo rv">
       <div class="crow"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg></div>
-        <div><h4>Call Us</h4><a href="tel:+971506778293">+971 50 677 8293</a></div></div>
+        <div><h4>Call Us</h4><a href="tel:+971568231119">+971 56 823 1119</a></div></div>
       <div class="crow"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
         <div><h4>Email Us</h4><a href="mailto:Info@axlesolutions.ae">Info@axlesolutions.ae</a></div></div>
       <div class="crow"><div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg></div>
@@ -636,7 +663,7 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:72px 0 28p
         <a href="https://www.tajalmas.com" target="_blank" rel="noopener">Taj Al Mas Metal Fabrication &amp; Welding LLC</a>
         <a href="https://www.tajalmas.com" target="_blank" rel="noopener">Taj Al Mas Eng. Turning</a>
         <a href="https://www.firdoussteel.com" target="_blank" rel="noopener">Firdous Metalic Ind. LLC</a>
-        <a href="tel:+971506778293">+971 50 677 8293</a>
+        <a href="tel:+971568231119">+971 56 823 1119</a>
         <a href="mailto:Info@axlesolutions.ae">Info@axlesolutions.ae</a></div>
     </div>
     <div class="foot-bottom">
@@ -648,9 +675,9 @@ footer{background:var(--ink);border-top:1px solid var(--line);padding:72px 0 28p
 
 <!-- FLOAT CTA -->
 <div class="float-cta">
-  <a class="fab-wa" href="https://wa.me/971506778293" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <a class="fab-wa" href="https://wa.me/971568231119" target="_blank" rel="noopener" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm5.5 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .3-3.3-.7-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.3.7-2 .9-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.5c-.2.2-.3.4-.1.6.2.4.9 1.4 1.9 2.3 1.2 1.1 2.2 1.4 2.5 1.5.2.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l2 1c.3.1.4.2.5.3.1.2.1.7-.1 1.4Z"/></svg></a>
-  <a class="fab-call" href="tel:+971506778293" aria-label="Call">
+  <a class="fab-call" href="tel:+971568231119" aria-label="Call">
     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg></a>
   <button id="toTop" aria-label="Back to top">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
@@ -675,6 +702,13 @@ const CATEGORIES=[
  ["Cladding & Profiles","img/cat-profiles.jpg","GI & SS channels, base-post systems, U-profiles, strut supports and architectural metal cladding."],
  ["Custom Fabrication & Welding","img/cat-welding.jpg","MS & SS welding, sheet bending and one-off fabrication built exactly to your specifications."],
  ["Pergolas & Canopies","img/cat-pergola.jpg","Steel pergolas, canopies and shade structures for homes, cafés and commercial outdoor spaces."]
+];
+const MACHINES=[
+ ["Laser Cutting Machine","20 kW &amp; 6 kW fibre laser — cutting beds 2000×6000 mm and 2000×3000 mm.","img/machine-laser.jpg","20 &amp; 6 kW"],
+ ["CNC Press Brake","Hydraulic CNC sheet &amp; plate bending up to 4000 × 1500 mm.","img/machine-pressbrake.jpg","4000×1500"],
+ ["Shearing Machine","Guillotine shearing of plate and sheet, cut cleanly to size.","img/machine-shearing.jpg","Guillotine"],
+ ["Pipe Rolling Machine","Section, tube and pipe rolling &amp; bending to your radius.","img/machine-piperolling.jpg","3-Roll"],
+ ["Power Press Machine","Stamping, punching and metal forming on a power press.","img/machine-powerpress.jpg","Stamping"]
 ];
 const BENEFITS=[
  ["M12 2 3 7v10l9 5 9-5V7l-9-5Z","Premium Materials","Grade 304 & 316 stainless steel and certified mild steel for lasting strength."],
@@ -706,7 +740,7 @@ const FAQ=[
  ["What materials do you work with?","Grade 304 and 316 stainless steel, mild steel and aluminium — selected to suit your application and budget."],
  ["Do you handle design and installation too?","Yes. We offer a turnkey service: site survey, drawings, fabrication, finishing and on-site installation."],
  ["Can you work from my own drawings?","Absolutely. Send us your drawings or specifications and we'll fabricate exactly to them, or help refine the design first."],
- ["How do I get a quote?","Use the form above or call us on +971 50 677 8293. Share your requirement and we'll respond within one business day."]
+ ["How do I get a quote?","Use the form above or call us on +971 56 823 1119. Share your requirement and we'll respond within one business day."]
 ];
 
 /* ===================== BUILD ===================== */
@@ -723,6 +757,13 @@ $("#catGrid").innerHTML=CATEGORIES.map((c,i)=>`
    <span class="cat-more">Enquire <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
  </a>`).join("");
 
+
+/* machines */
+$("#machGrid").innerHTML=MACHINES.map(m=>`
+ <div class="mach-card rv">
+  <div class="mach-img"><span class="mach-tag">${m[3]}</span><img src="${m[2]}" alt="${m[0]}" loading="lazy" decoding="async"></div>
+  <div class="mach-body"><h3>${m[0]}</h3><p>${m[1]}</p></div>
+ </div>`).join("");
 
 /* benefits */
 $("#beneGrid").innerHTML=BENEFITS.map(b=>`
